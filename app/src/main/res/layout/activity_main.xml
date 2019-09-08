@@ -7,17 +7,17 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/button-all"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="114dp"
         android:layout_height="55dp"
         android:layout_marginBottom="16dp"
         android:text="@string/all_jp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button4" />
+        app:layout_constraintEnd_toStartOf="@+id/button-completed" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button-completed"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="114dp"
         android:layout_height="55dp"
@@ -29,14 +29,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button-active"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="114dp"
         android:layout_height="55dp"
         android:layout_marginBottom="16dp"
         android:text="@string/active_jp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintStart_toEndOf="@+id/button-completed"
         tools:text="@string/active_jp" />
 
     <EditText
@@ -68,7 +68,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="402dp"
         android:layout_height="519dp"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText">
 

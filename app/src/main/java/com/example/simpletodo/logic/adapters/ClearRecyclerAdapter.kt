@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simpletodo.R
 import com.example.simpletodo.inflate
+import com.example.simpletodo.logic.Observer
 import com.example.simpletodo.logic.TaskListRevealer
 import com.example.simpletodo.models.ToDoTask
 import kotlinx.android.synthetic.main.clear_layout.view.*
 import kotlin.collections.ArrayList
 
-class ClearRecyclerAdapter(taskListRevealer: TaskListRevealer) : RecyclerView.Adapter<ClearRecyclerAdapter.ClearViewHolder>()   {
+class ClearRecyclerAdapter(taskListRevealer: TaskListRevealer) : RecyclerView.Adapter<ClearRecyclerAdapter.ClearViewHolder>(), Observer   {
 
     val _taskListRevealer = taskListRevealer
 
@@ -30,24 +31,37 @@ class ClearRecyclerAdapter(taskListRevealer: TaskListRevealer) : RecyclerView.Ad
         holder.bindTask(task)
     }
 
-    class ClearViewHolder(v: View, taskListRevealer: TaskListRevealer) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    override fun update() {
+        this.notifyDataSetChanged()
+    }
+
+    class ClearViewHolder(v: View, taskListRevealer: TaskListRevealer) : RecyclerView.ViewHolder(v), View.OnClickListener, Observer {
         private var view: View = v
         private val _taskListRevealer = taskListRevealer
+        private var task: ToDoTask? = null
 
         init {
-            v.setOnClickListener(this)
+            v.checkbox.setOnClickListener(this)
         }
 
         override fun onClick(v: View) {
             _taskListRevealer.toggleChecked(this.layoutPosition)
-            v.checkbox.toggle()
         }
 
         fun bindTask(toDoTask: ToDoTask) {
-            if(toDoTask.completed) {
-                view.checkbox.toggle()
-            }
+            view.checkbox.setChecked(toDoTask.completed)
+            task = toDoTask
         }
+
+        override fun update() {
+            val localTask = task;
+            if(localTask != null) {
+                view.checkbox.setChecked(localTask.completed)
+            }
+
+        }
+
+
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.simpletodo.logic.adapters
+package com.example.simpletodo.models
 
 enum class Mode {
     All,

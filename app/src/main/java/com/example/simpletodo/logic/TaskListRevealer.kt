@@ -1,9 +1,9 @@
 package com.example.simpletodo.logic
 
-import com.example.simpletodo.logic.adapters.Mode
+import com.example.simpletodo.models.Mode
 import com.example.simpletodo.models.ToDoTask
 
-class TaskListRevealer {
+class TaskListRevealer(): Observable() {
 
     var tasksBeingShown = ArrayList<ToDoTask>()
         private set
@@ -43,12 +43,14 @@ class TaskListRevealer {
                 }
             }
         }
+        notifyObservers()
     }
 
     fun showAll() {
         tasksBeingShown.clear()
         allTasks.forEach{ t -> tasksBeingShown.add(t) }
         mode = Mode.All
+        notifyObservers()
     }
 
     fun showCompleted() {
@@ -57,13 +59,16 @@ class TaskListRevealer {
             .filter { t -> t.completed }
             .forEach { t -> tasksBeingShown.add(t)}
         mode = Mode.Completed
+        notifyObservers()
     }
 
     fun showActive() {
         tasksBeingShown.clear()
         allTasks
-            .filter { t -> tasksBeingShown.add(t) }
+            .filter { t -> !t.completed }
+            .forEach{ t -> tasksBeingShown.add(t) }
         mode = Mode.Active
+        notifyObservers()
     }
 
 }

@@ -10,9 +10,8 @@ import com.example.simpletodo.logic.adapters.TaskRecyclerAdapter
 import com.example.simpletodo.models.ToDoTask
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
-
-
+import android.widget.EditText
+import android.widget.ImageView
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private val taskListRevealer: TaskListRevealer = TaskListRevealer()
     private val taskRecycleAdapter = TaskRecyclerAdapter(taskListRevealer.tasksBeingShown)
     private val clearRecyclerAdapter = ClearRecyclerAdapter(taskListRevealer)
+    private var  editText: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +31,15 @@ class MainActivity : AppCompatActivity() {
         val buttonAll = findViewById<Button>(R.id.button_all)
         val buttonActive = findViewById<Button>(R.id.button_active)
         val buttonCompleted = findViewById<Button>(R.id.button_completed)
+        val imageViewAdd = findViewById<ImageView>(R.id.imageViewAdd)
+        editText = findViewById<EditText>(R.id.editText)
+
+        imageViewAdd.setOnClickListener {
+            val editTextLocal = editText
+            if(editTextLocal != null) {
+                taskListRevealer.addTask(ToDoTask(editTextLocal.text.toString(), false))
+            }
+        }
 
         buttonAll.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
@@ -49,14 +58,6 @@ class MainActivity : AppCompatActivity() {
                 taskListRevealer.showCompleted()
             }
         })
-
-
-
-
-        taskListRevealer.addTask(ToDoTask("task", false))
-        taskListRevealer.addTask(ToDoTask("task", false))
-
-        taskListRevealer.addTask(ToDoTask("task", false))
 
     }
 

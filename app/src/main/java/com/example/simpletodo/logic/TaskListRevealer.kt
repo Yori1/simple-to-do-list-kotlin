@@ -17,6 +17,7 @@ class TaskListRevealer(): Observable() {
         if(mode == Mode.All || mode == Mode.Active) {
             tasksBeingShown.add(task)
         }
+        notifyObservers()
     }
 
     fun deleteTask(index: Int) {

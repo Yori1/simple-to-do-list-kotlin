@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SimpleToDo</string>
+    <string name="all_jp">全部</string>
+    <string name="active_jp">アクティブ</string>
+    <string name="completed_jp">完了済み</string>
+    <string name="clear_completed_jp">完了済みをクリア</string>
+    <string name="add_jp">追加</string>
+    <string name="please_enter_task_jp">タスクを入力してください</string>
+</resources>

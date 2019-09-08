@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.task_layout.view.*
 import java.util.logging.Logger
 
 class TaskRecyclerAdapter(_toDoTasks: ArrayList<ToDoTask>) : RecyclerView.Adapter<TaskRecyclerAdapter.ToDoTaskHolder>()  {
-    protected var toDoTasks: ArrayList<ToDoTask> = _toDoTasks
+    private var toDoTasks: ArrayList<ToDoTask> = _toDoTasks
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoTaskHolder {
         val inflatedView = parent.inflate(R.layout.task_layout, false)

@@ -47,8 +47,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="@string/please_enter_task_jp"
         android:inputType="textPersonName"
-        android:text="@string/please_enter_task_jp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

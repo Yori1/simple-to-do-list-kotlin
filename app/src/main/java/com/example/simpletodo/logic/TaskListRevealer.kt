@@ -1,5 +1,6 @@
 package com.example.simpletodo.logic
 
+import com.example.simpletodo.logic.adapters.Mode
 import com.example.simpletodo.models.ToDoTask
 
 class TaskListRevealer {
@@ -9,24 +10,45 @@ class TaskListRevealer {
 
     private val allTasks = ArrayList<ToDoTask>()
 
-    private var showAddedTasks = true
+    private var mode: Mode = Mode.All
 
     fun addTask(task: ToDoTask) {
         allTasks.add(task)
-        if(showAddedTasks) {
+        if(mode == Mode.All || mode == Mode.Active) {
             tasksBeingShown.add(task)
         }
     }
 
     fun deleteTask(index: Int) {
-        tasksBeingShown.removeAt(index)
-        allTasks.removeAt(index)
+        val taskToRemove = tasksBeingShown.elementAtOrNull(index)
+        if(taskToRemove!=null) {
+            tasksBeingShown.removeAt(index)
+            allTasks.remove(taskToRemove)
+        }
+    }
+
+    fun toggleChecked(index: Int) {
+        val task = tasksBeingShown.elementAtOrNull(index)
+        if(task != null ) {
+            task.toggleClear()
+            if(task.completed) {
+                if(mode == Mode.Active) {
+                    tasksBeingShown.remove(task)
+                }
+            }
+
+            else {
+                if(mode == Mode.Completed) {
+                    tasksBeingShown.remove(task)
+                }
+            }
+        }
     }
 
     fun showAll() {
         tasksBeingShown.clear()
         allTasks.forEach{ t -> tasksBeingShown.add(t) }
-        showAddedTasks = true
+        mode = Mode.All
     }
 
     fun showCompleted() {
@@ -34,14 +56,14 @@ class TaskListRevealer {
         allTasks
             .filter { t -> t.completed }
             .forEach { t -> tasksBeingShown.add(t)}
-        showAddedTasks = true
+        mode = Mode.Completed
     }
 
     fun showActive() {
         tasksBeingShown.clear()
         allTasks
             .filter { t -> tasksBeingShown.add(t) }
-        showAddedTasks = false
+        mode = Mode.Active
     }
 
 }

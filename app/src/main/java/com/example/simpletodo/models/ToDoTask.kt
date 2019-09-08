@@ -11,4 +11,8 @@ class ToDoTask(_content: String, _completed: Boolean) {
 
     var zonedDateTime: ZonedDateTime = ZonedDateTime.now()
     private set
+
+    fun toggleClear() {
+        completed = !completed
+    }
 }

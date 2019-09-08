@@ -1,25 +1,30 @@
-package com.example.simpletodo
+package com.example.simpletodo.logic.adapters
 
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.simpletodo.R
+import com.example.simpletodo.inflate
 import com.example.simpletodo.models.ToDoTask
 import kotlinx.android.synthetic.main.task_layout.view.*
+import java.util.logging.Logger
 
-class RecyclerAdapter(_toDoTasks: ArrayList<ToDoTask>) : RecyclerView.Adapter<RecyclerAdapter.ToDoTaskHolder>()  {
-    private var toDoTasks: ArrayList<ToDoTask> = _toDoTasks
+class TaskRecyclerAdapter(_toDoTasks: ArrayList<ToDoTask>) : RecyclerView.Adapter<TaskRecyclerAdapter.ToDoTaskHolder>()  {
+    protected var toDoTasks: ArrayList<ToDoTask> = _toDoTasks
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ToDoTaskHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoTaskHolder {
         val inflatedView = parent.inflate(R.layout.task_layout, false)
-        return ToDoTaskHolder(inflatedView)
+        return ToDoTaskHolder(
+            inflatedView
+        )
     }
 
     override fun getItemCount(): Int {
         return toDoTasks.count()
     }
 
-    override fun onBindViewHolder(holder: RecyclerAdapter.ToDoTaskHolder, position: Int) {
+    override fun onBindViewHolder(holder: ToDoTaskHolder, position: Int) {
         val task = toDoTasks.elementAt(position)
         holder.bindTask(task)
     }
@@ -31,10 +36,11 @@ class RecyclerAdapter(_toDoTasks: ArrayList<ToDoTask>) : RecyclerView.Adapter<Re
 
         init {
             v.setOnClickListener(this)
+
         }
 
         override fun onClick(v: View) {
-            Log.d("RecyclerView", "CLICK!")
+            Log.e("a","click")
         }
 
         fun bindTask(toDoTask: ToDoTask) {

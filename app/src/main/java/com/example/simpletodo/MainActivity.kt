@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simpletodo.logic.TaskListRevealer
-import com.example.simpletodo.logic.adapters.ClearRecyclerAdapter
 import com.example.simpletodo.logic.adapters.TaskRecyclerAdapter
 import com.example.simpletodo.models.ToDoTask
 import android.view.View
@@ -17,8 +16,7 @@ import android.widget.ImageView
 class MainActivity : AppCompatActivity() {
 
     private val taskListRevealer: TaskListRevealer = TaskListRevealer()
-    private val taskRecycleAdapter = TaskRecyclerAdapter(taskListRevealer.tasksBeingShown)
-    private val clearRecyclerAdapter = ClearRecyclerAdapter(taskListRevealer)
+    private val taskRecycleAdapter = TaskRecyclerAdapter(taskListRevealer)
     private var  editText: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         prepareTaskRecyclerView()
-        prepareClearRecyclerView()
 
         val buttonAll = findViewById<Button>(R.id.button_all)
         val buttonActive = findViewById<Button>(R.id.button_active)
@@ -66,13 +63,6 @@ class MainActivity : AppCompatActivity() {
         val recyclerViewTasks: RecyclerView = findViewById(R.id.recyclerViewTasks)
         recyclerViewTasks.layoutManager = LinearLayoutManager(this)
         recyclerViewTasks.adapter = taskRecycleAdapter
-    }
-
-    fun prepareClearRecyclerView() {
-        taskListRevealer.subscribe(clearRecyclerAdapter)
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerViewClear)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = clearRecyclerAdapter
     }
 
 
